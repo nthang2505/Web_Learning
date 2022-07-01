@@ -6,7 +6,7 @@ let handleLogin = async (req,res) =>{
     if(!email || !password){
         return res.status(500).json({
             errCode: 1,
-            message: 'missing inputs'
+            message: 'Missing inputs!!!'
         })
     }
 
@@ -19,6 +19,18 @@ let handleLogin = async (req,res) =>{
     })
 }
 
+let handleGetAllUsers = async(req, res)=>{
+    let id = req.body.id; //ALL, Single
+    let user = await userService.getAllUsers(id);
+    
+    return res.status(200).json({
+        errCode: 0,
+        errMessage: 'OK',
+        users: user
+    })
+}
+
 module.exports = {
     handleLogin: handleLogin,
+    handleGetAllUsers: handleGetAllUsers
 }
